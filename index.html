@@ -173,6 +173,33 @@
             gap: 30px;
         }
 
+        .grid-4 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 25px;
+        }
+
+        .bonus-card {
+            background: linear-gradient(135deg, rgba(255, 95, 95, 0.15), rgba(0, 242, 255, 0.1));
+            border: 2px solid var(--secondary) !important;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .bonus-card::before {
+            content: "🏆 BONUS";
+            position: absolute;
+            top: 15px;
+            right: -30px;
+            background: var(--secondary);
+            color: #000;
+            padding: 5px 40px;
+            font-size: 0.7rem;
+            font-weight: 800;
+            transform: rotate(45deg);
+            letter-spacing: 1px;
+        }
+
         .tier-card {
             position: relative;
         }
@@ -290,6 +317,7 @@
             h2 { font-size: 1.8rem; }
             section { padding: 60px 0; }
             .grid-3 { grid-template-columns: 1fr; }
+            .grid-4 { grid-template-columns: 1fr; }
         }
 
         #success-message {
@@ -320,7 +348,7 @@
     <section id="value">
         <div class="container fade-in-section">
             <h2>What <span>You Get</span></h2>
-            <div class="grid-3">
+            <div class="grid-4">
                 <div class="glass-card tier-card">
                     <div class="tier-badge">Micro (5K-50K)</div>
                     <h3>Agentic Landing Page</h3>
@@ -352,6 +380,20 @@
                         <li>Monthly Maintenance Included</li>
                         <li>Custom AI Persona Training</li>
                         <li>Priority Support</li>
+                    </ul>
+                </div>
+                <div class="glass-card tier-card bonus-card">
+                    <h3 style="color: var(--secondary);">🤖 The JARVIS Package</h3>
+                    <div class="tier-price">Value: R150,000+</div>
+                    <p style="font-size: 0.85rem; color: var(--primary); margin-bottom: 15px;">Awarded to the <strong>2 partners</strong> who drive the most traffic to our platforms.</p>
+                    <ul class="tier-features">
+                        <li>Everything in Enterprise Tier</li>
+                        <li>Fully Autonomous AI Agent — does the work of 100 staff</li>
+                        <li>Personal AI assistant (like JARVIS from Iron Man)</li>
+                        <li>Handles emails, scheduling, research, content, admin</li>
+                        <li>WhatsApp + Telegram + Web — always on, always learning</li>
+                        <li>Custom-trained on YOUR brand, YOUR voice, YOUR workflow</li>
+                        <li>Lifetime maintenance included</li>
                     </ul>
                 </div>
             </div>
@@ -561,6 +603,7 @@
             const data = Object.fromEntries(formData.entries());
 
             try {
+                // Send to n8n webhook (triggers Nova email notification)
                 const response = await fetch('https://webhooks.quikle.co.za/webhook/partner-apply', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
